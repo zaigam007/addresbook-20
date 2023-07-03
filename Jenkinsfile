@@ -1,13 +1,16 @@
-node{
-    stage('code checkout'){
-        git 'https://github.com/shubhamkushwah123/addressbook-demo.git'
+node('slave'){
+    stage('git checkout'){
+        echo 'git checkout'
+        git 'https://github.com/ashinv121/addresbook-20.git'
+        
     }
-    
-    stage('clean.. compile... test... package...'){
+    stage('build'){
+        
         sh 'mvn clean package'
     }
-    
-    stage('deploy to tomcat'){
-        deploy adapters: [tomcat9(credentialsId: 'tomcat-creds', path: '', url: 'http://3.92.185.25:8085/')], contextPath: 'addressbook', war: '**/*.war'
+    stage('tomcat deploy'){
+        
+        deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://172.31.45.182:8080')], contextPath: 'address-book2.0', war: '**/*.war'
     }
+    
 }
