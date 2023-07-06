@@ -1,4 +1,4 @@
-node('slave'){
+node{
     stage('git checkout'){
         echo 'git checkout'
         git 'https://github.com/ashinv121/addresbook-20.git'
